@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>부모 연습 중 — 매일 아침 30초 육아 리마인더</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream:   #FDF8F2;
+      --warm:    #F5EDE0;
+      --orange:  #E07B3A;
+      --orange2: #C9662A;
+      --brown:   #5C3D2E;
+      --light:   #A0856C;
+      --kakao:   #FEE500;
+      --kakao2:  #E6CE00;
+      --text:    #2D1F14;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Pretendard', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── 배경 텍스처 ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(224,123,58,.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 75%, rgba(92,61,46,.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(253,248,242,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(92,61,46,.08);
+    }
+
+    .logo {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brown);
+      letter-spacing: -.3px;
+    }
+
+    .logo span { color: var(--orange); }
+
+    .header-cta {
+      background: var(--kakao);
+      color: var(--text);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .header-cta:hover {
+      background: var(--kakao2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(254,229,0,.4);
+    }
+
+    /* ── 히어로 ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--warm);
+      border: 1px solid rgba(224,123,58,.25);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--orange);
+      letter-spacing: .5px;
+      margin-bottom: 32px;
+      animation: fadeUp .8s ease both;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:.5; transform:scale(1.3); }
+    }
+
+    .hero-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--brown);
+      margin-bottom: 12px;
+      animation: fadeUp .8s .1s ease both;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--orange);
+      position: relative;
+    }
+
+    .hero-title em::after {
+      content: '';
+      position: absolute;
+      bottom: 4px; left: 0; right: 0;
+      height: 3px;
+      background: var(--orange);
+      opacity: .3;
+      border-radius: 2px;
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--light);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 48px;
+      font-weight: 400;
+      animation: fadeUp .8s .2s ease both;
+    }
+
+    .hero-cta-wrap {
+      animation: fadeUp .8s .3s ease both;
+    }
+
+    .kakao-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--kakao);
+      color: var(--text);
+      text-decoration: none;
+      padding: 18px 36px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 700;
+      transition: all .25s;
+      box-shadow: 0 4px 24px rgba(254,229,0,.35);
+    }
+
+    .kakao-btn:hover {
+      background: var(--kakao2);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(254,229,0,.45);
+    }
+
+    .kakao-btn:active { transform: translateY(-1px); }
+
+    .kakao-icon {
+      width: 24px; height: 24px;
+    }
+
+    .hero-note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--light);
+      animation: fadeUp .8s .4s ease both;
+    }
+
+    /* ── 스크롤 힌트 ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--light);
+      font-size: 11px;
+      letter-spacing: 1px;
+      animation: fadeUp 1s .8s ease both;
+    }
+
+    .scroll-arrow {
+      width: 20px; height: 20px;
+      border-right: 2px solid var(--light);
+      border-bottom: 2px solid var(--light);
+      transform: rotate(45deg);
+      animation: bounce 1.5s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: rotate(45deg) translateY(0); }
+      50%      { transform: rotate(45deg) translateY(5px); }
+    }
+
+    /* ── 공감 섹션 ── */
+    .empathy {
+      position: relative;
+      z-index: 1;
+      padding: 80px 24px;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .empathy-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .empathy-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700;
+      color: var(--brown);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .empathy-body {
+      font-size: 15px;
+      color: var(--light);
+      line-height: 1.9;
+    }
+
+    /* ── 공감 카드 ── */
+    .scenes {
+      position: relative;
+      z-index: 1;
+      padding: 0 24px 80px;
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .scene-card {
+      background: var(--warm);
+      border: 1px solid rgba(92,61,46,.1);
+      border-radius: 20px;
+      padding: 28px 24px;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .scene-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(92,61,46,.1);
+    }
+
+    .scene-emoji { font-size: 32px; margin-bottom: 14px; }
+
+    .scene-text {
+      font-size: 14px;
+      color: var(--brown);
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .scene-text strong {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--orange);
+    }
+
+    /* ── 서비스 소개 ── */
+    .how {
+      position: relative;
+      z-index: 1;
+      background: var(--brown);
+      color: var(--cream);
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .how-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .how-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 700;
+      margin-bottom: 56px;
+      line-height: 1.4;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      max-width: 800px;
+      margin: 0 auto 64px;
+    }
+
+    .step {
+      flex: 1;
+      min-width: 180px;
+      max-width: 220px;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -8px;
+      top: 24px;
+      color: var(--orange);
+      font-size: 20px;
+    }
+
+    .step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--cream);
+    }
+
+    .step-desc {
+      font-size: 12px;
+      color: rgba(253,248,242,.6);
+      line-height: 1.7;
+    }
+
+    /* ── 카드 미리보기 ── */
+    .preview {
+      position: relative;
+      z-index: 1;
+      padding: 80px 24px;
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .preview-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .preview-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 40px;
+      line-height: 1.4;
+    }
+
+    .card-mockup {
+      background: white;
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 20px 60px rgba(92,61,46,.12);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-mockup::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), #F4A261);
+    }
+
+    .card-tag {
+      display: inline-block;
+      background: #FFF3E0;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+
+    .card-time {
+      font-size: 12px;
+      color: var(--light);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-body {
+      font-size: 16px;
+      color: var(--brown);
+      line-height: 1.8;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    .card-reason {
+      font-size: 13px;
+      color: var(--light);
+      line-height: 1.6;
+      padding-top: 16px;
+      border-top: 1px solid rgba(92,61,46,.08);
+    }
+
+    .card-btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .card-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+    }
+
+    .card-btn-yes {
+      background: #FFF3E0;
+      color: var(--orange);
+    }
+
+    .card-btn-no {
+      background: #F5F5F5;
+      color: #999;
+    }
+
+    /* ── CTA 섹션 ── */
+    .cta-section {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(135deg, #FDF1E4 0%, var(--warm) 100%);
+      padding: 80px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(224,123,58,.1);
+    }
+
+    .cta-title {
+      font-family: 'Nanum Myeongjo', serif;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      color: var(--brown);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .cta-sub {
+      font-size: 15px;
+      color: var(--light);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .kakao-btn-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--kakao);
+      color: var(--text);
+      text-decoration: none;
+      padding: 20px 48px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 700;
+      transition: all .25s;
+      box-shadow: 0 6px 28px rgba(254,229,0,.4);
+    }
+
+    .kakao-btn-large:hover {
+      background: var(--kakao2);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 40px rgba(254,229,0,.5);
+    }
+
+    .cta-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--light);
+    }
+
+    /* ── 푸터 ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: var(--brown);
+      color: rgba(253,248,242,.5);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    footer a {
+      color: rgba(253,248,242,.7);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--cream); }
+
+    /* ── 애니메이션 ── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* ── 폰 목업 ── */
+    .phone-mockup {
+      width: 280px;
+      background: #fff;
+      border-radius: 36px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.18), 0 0 0 9px #1a1a1a, 0 0 0 11px #3a3a3a;
+      overflow: hidden;
+    }
+    .pm-notch {
+      background: #1a1a1a;
+      height: 22px;
+      border-radius: 0 0 14px 14px;
+      width: 100px;
+      margin: 0 auto;
+    }
+    .pm-status {
+      background: #f9f9f9;
+      display: flex;
+      justify-content: space-between;
+      padding: 5px 18px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    .pm-header {
+      background: #f9f9f9;
+      border-bottom: 1px solid #eee;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pm-back { font-size: 20px; color: #333; line-height:1; }
+    .pm-ch-info { flex:1; display:flex; align-items:center; gap:7px; }
+    .pm-ch-avatar {
+      width: 30px; height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg,#E07B3A,#F4A261);
+      display:flex; align-items:center; justify-content:center;
+      font-size: 14px; flex-shrink:0;
+    }
+    .pm-ch-name { font-size:12px; font-weight:700; color:#1a1a1a; display:flex; align-items:center; gap:4px; }
+    .pm-ch-badge { background:#3A7BFF; color:#fff; font-size:7px; font-weight:700; padding:1px 4px; border-radius:3px; }
+    .pm-ch-sub { font-size:9px; color:#aaa; }
+    .pm-body {
+      background: #b2c7d9;
+      padding: 12px 10px;
+      min-height: 300px;
+    }
+    .pm-date { text-align:center; margin-bottom:12px; }
+    .pm-date span { background:rgba(0,0,0,.22); color:#fff; font-size:9px; padding:2px 9px; border-radius:8px; }
+    .pm-msg-row { display:flex; align-items:flex-start; gap:7px; }
+    .pm-msg-avatar {
+      width:30px; height:30px; border-radius:8px;
+      background:linear-gradient(135deg,#E07B3A,#F4A261);
+      display:flex; align-items:center; justify-content:center;
+      font-size:14px; flex-shrink:0;
+    }
+    .pm-msg-right { flex:1; }
+    .pm-msg-sender { font-size:9px; font-weight:700; color:#1a1a1a; margin-bottom:4px; }
+    .pm-card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.12); max-width:190px; }
+    .pm-card-top { background:linear-gradient(135deg,#E07B3A,#F4A261); padding:10px 13px 9px; }
+    .pm-card-time { font-size:8px; color:rgba(255,255,255,.8); margin-bottom:3px; }
+    .pm-card-service { font-size:10px; font-weight:700; color:#fff; }
+    .pm-card-body { padding:11px 13px; }
+    .pm-tag { display:inline-block; background:#FFF3E0; color:#E07B3A; font-size:8px; font-weight:700; padding:2px 7px; border-radius:50px; margin-bottom:8px; }
+    .pm-msg-text { font-size:11.5px; color:#2D1F14; line-height:1.65; }
+    .pm-msg-text strong { font-weight:700; color:#E07B3A; }
+    .pm-reason { font-size:9px; color:#aaa; line-height:1.5; margin-top:8px; padding-top:8px; border-top:1px solid #f0f0f0; }
+    .pm-btns { border-top:1px solid #f0f0f0; display:flex; }
+    .pm-btn { flex:1; padding:8px 6px; font-size:10px; font-weight:600; text-align:center; color:#3A7BFF; cursor:pointer; }
+    .pm-btn-r { border-left:1px solid #f0f0f0; color:#999; }
+    .pm-time { font-size:8px; color:rgba(255,255,255,.75); text-align:center; line-height:1.4; white-space:nowrap; align-self:flex-end; }
+    .pm-input-row { background:#f9f9f9; border-top:1px solid #eee; padding:8px 12px; display:flex; align-items:center; gap:8px; }
+    .pm-input-box { flex:1; background:#fff; border:1px solid #e0e0e0; border-radius:16px; padding:6px 12px; font-size:10px; color:#ccc; }
+    .pm-send { width:28px; height:28px; background:#FEE500; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; }
+    .pm-home-bar { background:#f9f9f9; height:20px; display:flex; align-items:center; justify-content:center; }
+    .pm-home-bar div { width:80px; height:3px; background:#1a1a1a; border-radius:2px; opacity:.15; }
+
+    /* ── 반응형 ── */
+    @media (max-width: 600px) {
+      header { padding: 16px 20px; }
+      .step:not(:last-child)::after { display: none; }
+      .steps { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<header>
+  <div class="logo">부모 <span>연습 중</span></div>
+  <a href="https://pf.kakao.com/_YOUR_CHANNEL_ID" class="header-cta" target="_blank">
+    <svg class="kakao-icon" viewBox="0 0 24 24" fill="none">
+      <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.7 1.72 5.08 4.32 6.45L6.3 20.1c-.09.27.2.48.44.33L10.5 18c.49.06.99.09 1.5.09 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#3C1E1E"/>
+    </svg>
+    채널 추가하기
+  </a>
+</header>
+
+<!-- 히어로 -->
+<section class="hero">
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    매일 아침 7:30 카카오톡으로 전달됩니다
+  </div>
+
+  <h1 class="hero-title">
+    알고 있지만,<br />
+    그 순간엔 <em>잊게 되는</em> 것들
+  </h1>
+
+  <p class="hero-sub">
+    화내고 나서야 생각나는 육아 팁.<br />
+    매일 아침 30초, 미리 받아보세요.
+  </p>
+
+  <div class="hero-cta-wrap">
+    <a href="https://pf.kakao.com/_YOUR_CHANNEL_ID" class="kakao-btn" target="_blank">
+      <svg class="kakao-icon" viewBox="0 0 24 24" fill="none">
+        <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.7 1.72 5.08 4.32 6.45L6.3 20.1c-.09.27.2.48.44.33L10.5 18c.49.06.99.09 1.5.09 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#3C1E1E"/>
+      </svg>
+      카카오 채널 친구 추가
+    </a>
+  </div>
+  <p class="hero-note">무료 · 광고 없음 · 언제든 해제 가능</p>
+
+  <div class="scroll-hint">
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- 공감 섹션 -->
+<section class="empathy reveal">
+  <div class="empathy-label">이런 경험 있으신가요</div>
+  <h2 class="empathy-title">
+    좋은 글을 봤는데<br />정작 그 순간엔 생각이 안 나요
+  </h2>
+  <p class="empathy-body">
+    인스타에서 육아 팁을 저장해두지만 필요한 순간엔 꺼내보지 않게 됩니다.<br />
+    화를 내고 나서야 "아, 그렇게 하는 게 맞았는데" 하게 되죠.
+  </p>
+</section>
+
+<!-- 공감 카드들 -->
+<div class="scenes">
+  <div class="scene-card reveal">
+    <div class="scene-emoji">😤</div>
+    <div class="scene-text">
+      <strong>아이들이 또 싸웠을 때</strong>
+      "몇 번이나 말했어!" 하고 소리친 뒤 자책합니다.
+    </div>
+  </div>
+  <div class="scene-card reveal">
+    <div class="scene-emoji">😮‍💨</div>
+    <div class="scene-text">
+      <strong>같은 말을 반복했을 때</strong>
+      "왜 말을 안 들어?" 결국 화를 냈지만 방법이 있었는데.
+    </div>
+  </div>
+  <div class="scene-card reveal">
+    <div class="scene-emoji">😔</div>
+    <div class="scene-text">
+      <strong>재우다 지쳤을 때</strong>
+      "오늘도 실패했다"는 생각이 드는 취침 전 전쟁.
+    </div>
+  </div>
+</div>
+
+<!-- 서비스 소개 -->
+<section class="how">
+  <div class="how-label">서비스 소개</div>
+  <h2 class="how-title reveal">
+    새로운 정보가 아닙니다.<br />
+    이미 아는 것을 그 순간 전에 꺼내드립니다.
+  </h2>
+
+  <div class="steps reveal">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">채널 추가</div>
+      <div class="step-desc">카카오톡에서<br />1회 채널 친구 추가</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">매일 아침</div>
+      <div class="step-desc">오전 7시 30분<br />카드 1장 전송</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">30초 읽기</div>
+      <div class="step-desc">그 상황이 왔을 때<br />조금 달라집니다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 카드 미리보기 -->
+<section class="preview">
+  <div class="preview-label reveal">이런 카드가 전달됩니다</div>
+  <h2 class="preview-title reveal">오늘 아침 받을 카드</h2>
+
+  <div class="card-mockup reveal">
+    <div class="card-time">
+      🌅 오전 7:30 · 부모 연습 중
+    </div>
+    <div class="card-tag">#형제싸움</div>
+    <div class="card-body">
+      아이들이 싸울 때 즉시 개입하지 말고<br />
+      <strong>5초만 지켜보세요.</strong><br />
+      스스로 해결하는 작은 경험이 쌓입니다.
+    </div>
+    <div class="card-reason">
+      💡 연구에 따르면 형제 갈등은 협상, 소통, 인내심을 키우는 기회가 됩니다. 부모의 즉각 개입은 이 기회를 줄일 수 있어요.
+    </div>
+    <div class="card-btns">
+      <button class="card-btn card-btn-yes">👍 오늘 해볼게요</button>
+      <button class="card-btn card-btn-no">이미 알아요</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 섹션 -->
+<section class="cta-section">
+  <h2 class="cta-title reveal">
+    완벽한 부모가 되려는 게 아니에요.<br />
+    <em style="color:var(--orange);font-style:normal;">조금씩 연습</em>하면 됩니다.
+  </h2>
+  <p class="cta-sub reveal">
+    무료로 시작하세요. 광고 없이, 부담 없이.<br />
+    언제든 채널 해제할 수 있어요.
+  </p>
+
+  <div class="reveal">
+    <a href="https://pf.kakao.com/_YOUR_CHANNEL_ID" class="kakao-btn-large" target="_blank">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+        <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.7 1.72 5.08 4.32 6.45L6.3 20.1c-.09.27.2.48.44.33L10.5 18c.49.06.99.09 1.5.09 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#3C1E1E"/>
+      </svg>
+      카카오 채널 친구 추가
+    </a>
+    <p class="cta-note">무료 · 광고 없음 · 언제든 해제 가능</p>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <p>부모 연습 중</p>
+  <p style="margin-top:8px;">
+    <a href="#">개인정보처리방침</a> · <a href="#">이용약관</a>
+  </p>
+  <p style="margin-top:8px;">© 2025 부모 연습 중. All rights reserved.</p>
+</footer>
+
+<script>
+  // 스크롤 reveal
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.15 }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // 카드 버튼 인터랙션
+  document.querySelectorAll('.card-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.card-btn').forEach(b => b.style.opacity = '.5');
+      this.style.opacity = '1';
+      this.style.transform = 'scale(1.04)';
+    });
+  });
+</script>
+</body>
+</html>
