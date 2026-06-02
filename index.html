@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>부모 연습 중 — 매일 아침 30초 육아 리마인더</title>
+  <title>육아한스푼 — 매일 아침 30초 육아 리마인더</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
@@ -25,7 +25,7 @@
 
     body {
       background: var(--cream);
-      color: var(--text);
+      color: white;
       font-family: 'Pretendard', sans-serif;
       overflow-x: hidden;
     }
@@ -67,8 +67,8 @@
     .logo span { color: var(--orange); }
 
     .header-cta {
-      background: var(--kakao);
-      color: var(--text);
+      background: var(--orange);
+      color: white;
       border: none;
       padding: 10px 22px;
       border-radius: 50px;
@@ -83,7 +83,7 @@
     }
 
     .header-cta:hover {
-      background: var(--kakao2);
+      background: var(--orange2);
       transform: translateY(-1px);
       box-shadow: 0 4px 14px rgba(254,229,0,.4);
     }
@@ -173,21 +173,21 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: var(--kakao);
-      color: var(--text);
+      background: var(--orange);
+      color: white;
       text-decoration: none;
       padding: 18px 36px;
       border-radius: 50px;
       font-size: 16px;
       font-weight: 700;
       transition: all .25s;
-      box-shadow: 0 4px 24px rgba(254,229,0,.35);
+      box-shadow: 0 4px 24px rgba(224,123,58,.35);
     }
 
     .kakao-btn:hover {
-      background: var(--kakao2);
+      background: var(--orange2);
       transform: translateY(-3px);
-      box-shadow: 0 10px 32px rgba(254,229,0,.45);
+      box-shadow: 0 10px 32px rgba(224,123,58,.45);
     }
 
     .kakao-btn:active { transform: translateY(-1px); }
@@ -525,7 +525,7 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      background: var(--kakao);
+      background: var(--orange);
       color: var(--text);
       text-decoration: none;
       padding: 20px 48px;
@@ -533,13 +533,13 @@
       font-size: 18px;
       font-weight: 700;
       transition: all .25s;
-      box-shadow: 0 6px 28px rgba(254,229,0,.4);
+      box-shadow: 0 6px 28px rgba(224,123,58,.4);
     }
 
     .kakao-btn-large:hover {
-      background: var(--kakao2);
+      background: var(--orange2);
       transform: translateY(-4px);
-      box-shadow: 0 14px 40px rgba(254,229,0,.5);
+      box-shadow: 0 14px 40px rgba(224,123,58,.5);
     }
 
     .cta-note {
@@ -587,18 +587,22 @@
 
     /* ── 폰 목업 ── */
     .phone-mockup {
-      width: 280px;
+      width: 260px;
+      height: 560px;
       background: #fff;
-      border-radius: 36px;
-      box-shadow: 0 30px 80px rgba(0,0,0,.18), 0 0 0 9px #1a1a1a, 0 0 0 11px #3a3a3a;
+      border-radius: 40px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.18), 0 0 0 10px #1a1a1a, 0 0 0 12px #3a3a3a;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .pm-notch {
       background: #1a1a1a;
-      height: 22px;
-      border-radius: 0 0 14px 14px;
-      width: 100px;
+      height: 24px;
+      border-radius: 0 0 16px 16px;
+      width: 90px;
       margin: 0 auto;
+      flex-shrink: 0;
     }
     .pm-status {
       background: #f9f9f9;
@@ -608,6 +612,8 @@
       font-size: 10px;
       font-weight: 700;
       color: #1a1a1a;
+      flex-shrink: 0;
+    }
     }
     .pm-header {
       background: #f9f9f9;
@@ -664,6 +670,132 @@
     .pm-home-bar { background:#f9f9f9; height:20px; display:flex; align-items:center; justify-content:center; }
     .pm-home-bar div { width:80px; height:3px; background:#1a1a1a; border-radius:2px; opacity:.15; }
 
+    /* ── 이메일 목업 ── */
+    .email-mockup {
+      width: 520px;
+      background: #f5f5f5;
+      border-radius: 12px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.15), 0 0 0 1px rgba(0,0,0,.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .em-topbar {
+      background: #e8e8e8;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .em-dots { display:flex; gap:6px; }
+    .em-dots span { width:10px; height:10px; border-radius:50%; display:block; }
+    .em-title { font-size:12px; font-weight:600; color:#666; flex:1; text-align:center; }
+    .em-list { background:white; border-right:1px solid #eee; }
+    .em-item {
+      display:flex; gap:10px; padding:12px 14px;
+      border-bottom:1px solid #f0f0f0; cursor:pointer;
+    }
+    .em-item-active { background:#FFF8F3; border-left:3px solid #E07B3A; }
+    .em-avatar {
+      width:34px; height:34px; border-radius:50%;
+      background:linear-gradient(135deg,#E07B3A,#F4A261);
+      display:flex; align-items:center; justify-content:center;
+      font-size:16px; flex-shrink:0;
+    }
+    .em-item-body { flex:1; min-width:0; }
+    .em-item-header { display:flex; justify-content:space-between; margin-bottom:3px; }
+    .em-sender { font-size:12px; font-weight:700; color:#2D1F14; }
+    .em-time { font-size:10px; color:#E07B3A; font-weight:600; }
+    .em-subject { font-size:11px; font-weight:600; color:#333; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .em-preview { font-size:10px; color:#999; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .em-body { background:white; border-top:1px solid #eee; }
+    .em-email-body { padding:14px 18px; }
+    .em-msg { font-size:13px; color:#2D1F14; line-height:1.7; margin:10px 0; }
+    .em-reason { font-size:11px; color:#A0856C; padding-top:10px; border-top:1px solid #f5ece0; }
+    .em-email-footer { padding:10px 18px; border-top:1px solid #f0f0f0; font-size:10px; color:#bbb; text-align:center; }
+
+    /* ── Gmail 목업 ── */
+    .gm-topbar {
+      background: #fff;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #f1f3f4;
+    }
+    .gm-menu { font-size: 16px; color: #5f6368; }
+    .gm-logo { font-size: 14px; font-weight: 700; flex: 1; color: #5f6368; }
+    .gm-search {
+      width: 28px; height: 28px;
+      background: #f1f3f4;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px;
+    }
+    .gm-avatar {
+      width: 26px; height: 26px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; color: white;
+    }
+    .gm-tabs {
+      background: #fff;
+      display: flex;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .gm-tab {
+      flex: 1; text-align: center;
+      padding: 8px 4px;
+      font-size: 10px; color: #80868b;
+    }
+    .gm-tab-active {
+      color: #1a73e8;
+      border-bottom: 2px solid #1a73e8;
+      font-weight: 700;
+    }
+    .gm-list { background: #fff; flex: 1; overflow: hidden; }
+    .gm-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #f1f3f4;
+    }
+    .gm-item-unread { background: #fff; }
+    .gm-item-read { background: #fff; opacity: .55; }
+    .gm-item-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; flex-shrink: 0;
+    }
+    .gm-avatar-brand {
+      background: linear-gradient(135deg, #E07B3A, #F4A261);
+    }
+    .gm-item-body { flex: 1; min-width: 0; }
+    .gm-item-row1 { display: flex; justify-content: space-between; margin-bottom: 2px; }
+    .gm-sender-bold { font-size: 12px; font-weight: 700; color: #202124; }
+    .gm-sender-read { font-size: 12px; color: #80868b; }
+    .gm-time-orange { font-size: 10px; color: var(--orange); font-weight: 700; }
+    .gm-time-read { font-size: 10px; color: #80868b; }
+    .gm-item-row2 { font-size: 11px; font-weight: 700; color: #202124; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gm-item-row2.gm-read { font-weight: 400; color: #80868b; }
+    .gm-item-row3 { font-size: 10px; color: #80868b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gm-nav {
+      background: #fff;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+    }
+    .gm-nav-item {
+      flex: 1; text-align: center;
+      padding: 8px 4px 6px;
+      font-size: 16px; color: #80868b;
+    }
+    .gm-nav-item div { font-size: 9px; margin-top: 2px; }
+    .gm-nav-active { color: #1a73e8; }
+    .gm-nav-active div { color: #1a73e8; font-weight: 700; }
+
     /* ── 반응형 ── */
     @media (max-width: 600px) {
       header { padding: 16px 20px; }
@@ -676,20 +808,15 @@
 
 <!-- 헤더 -->
 <header>
-  <div class="logo">부모 <span>연습 중</span></div>
-  <a href="https://pf.kakao.com/_YOUR_CHANNEL_ID" class="header-cta" target="_blank">
-    <svg class="kakao-icon" viewBox="0 0 24 24" fill="none">
-      <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.7 1.72 5.08 4.32 6.45L6.3 20.1c-.09.27.2.48.44.33L10.5 18c.49.06.99.09 1.5.09 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#3C1E1E"/>
-    </svg>
-    채널 추가하기
-  </a>
+  <div class="logo">육아<span>한스푼</span></div>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSd9ikelJSmO3MN3LguvJfgptcH1DZGO6v5qwHnMhvPISf99AA/viewform" class="header-cta" target="_blank">✉️ 이메일 구독</a>
 </header>
 
 <!-- 히어로 -->
 <section class="hero">
   <div class="hero-badge">
     <div class="hero-badge-dot"></div>
-    매일 아침 7:30 카카오톡으로 전달됩니다
+    매일 아침 7:30 이메일로 전달됩니다
   </div>
 
   <h1 class="hero-title">
@@ -703,14 +830,11 @@
   </p>
 
   <div class="hero-cta-wrap">
-    <a href="https://pf.kakao.com/_YOUR_CHANNEL_ID" class="kakao-btn" target="_blank">
-      <svg class="kakao-icon" viewBox="0 0 24 24" fill="none">
-        <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.7 1.72 5.08 4.32 6.45L6.3 20.1c-.09.27.2.48.44.33L10.5 18c.49.06.99.09 1.5.09 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#3C1E1E"/>
-      </svg>
-      카카오 채널 친구 추가
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd9ikelJSmO3MN3LguvJfgptcH1DZGO6v5qwHnMhvPISf99AA/viewform" class="kakao-btn" target="_blank">
+      ✉️ 무료 이메일 구독하기
     </a>
   </div>
-  <p class="hero-note">무료 · 광고 없음 · 언제든 해제 가능</p>
+  <p class="hero-note">무료 · 광고 없음 · 언제든 구독 해지 가능</p>
 
   <div class="scroll-hint">
     <div class="scroll-arrow"></div>
@@ -765,13 +889,13 @@
   <div class="steps reveal">
     <div class="step">
       <div class="step-num">1</div>
-      <div class="step-title">채널 추가</div>
-      <div class="step-desc">카카오톡에서<br />1회 채널 친구 추가</div>
+      <div class="step-title">이메일 구독</div>
+      <div class="step-desc">이메일 주소 입력<br />동의 후 구독</div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-title">매일 아침</div>
-      <div class="step-desc">오전 7시 30분<br />카드 1장 전송</div>
+      <div class="step-desc">오전 7시 30분<br />이메일 1통 전송</div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
@@ -781,27 +905,87 @@
   </div>
 </section>
 
-<!-- 카드 미리보기 -->
+<!-- 이메일 미리보기 — Gmail 폰 목업 -->
 <section class="preview">
-  <div class="preview-label reveal">이런 카드가 전달됩니다</div>
-  <h2 class="preview-title reveal">오늘 아침 받을 카드</h2>
+  <div class="preview-label reveal">이런 메시지가 전달됩니다</div>
+  <h2 class="preview-title reveal">매일 아침 7:30,<br/>이메일로 전달됩니다</h2>
 
-  <div class="card-mockup reveal">
-    <div class="card-time">
-      🌅 오전 7:30 · 부모 연습 중
-    </div>
-    <div class="card-tag">#형제싸움</div>
-    <div class="card-body">
-      아이들이 싸울 때 즉시 개입하지 말고<br />
-      <strong>5초만 지켜보세요.</strong><br />
-      스스로 해결하는 작은 경험이 쌓입니다.
-    </div>
-    <div class="card-reason">
-      💡 연구에 따르면 형제 갈등은 협상, 소통, 인내심을 키우는 기회가 됩니다. 부모의 즉각 개입은 이 기회를 줄일 수 있어요.
-    </div>
-    <div class="card-btns">
-      <button class="card-btn card-btn-yes">👍 오늘 해볼게요</button>
-      <button class="card-btn card-btn-no">이미 알아요</button>
+  <div class="reveal" style="display:flex;justify-content:center;">
+    <div class="phone-mockup">
+      <div class="pm-notch"></div>
+
+      <!-- 상태바 -->
+      <div class="pm-status" style="background:#fff;">
+        <span>7:30</span>
+        <span>●●● 🔋</span>
+      </div>
+
+      <!-- 이메일 앱 상단 바 -->
+      <div class="gm-topbar">
+        <span class="gm-menu">☰</span>
+        <span class="gm-logo">📬 메일</span>
+        <div class="gm-search">🔍</div>
+        <div class="gm-avatar">나</div>
+      </div>
+
+      <!-- 탭 -->
+      <div class="gm-tabs">
+        <div class="gm-tab gm-tab-active">받은편지함</div>
+        <div class="gm-tab">소셜</div>
+        <div class="gm-tab">프로모션</div>
+      </div>
+
+      <!-- 메일 목록 -->
+      <div class="gm-list">
+
+        <!-- 육아한스푼 메일 (강조) -->
+        <div class="gm-item gm-item-unread">
+          <div class="gm-item-avatar gm-avatar-brand">🌱</div>
+          <div class="gm-item-body">
+            <div class="gm-item-row1">
+              <span class="gm-sender-bold">육아한스푼</span>
+              <span class="gm-time-orange">오전 7:30</span>
+            </div>
+            <div class="gm-item-row2">[육아한스푼] #형제싸움 리마인더</div>
+            <div class="gm-item-row3">아이들이 싸울 때 즉시 개입하지 말고...</div>
+          </div>
+        </div>
+
+        <!-- 다른 메일들 (흐리게) -->
+        <div class="gm-item gm-item-read">
+          <div class="gm-item-avatar" style="background:#e8eaed;color:#80868b;font-size:11px;">N</div>
+          <div class="gm-item-body">
+            <div class="gm-item-row1">
+              <span class="gm-sender-read">뉴스레터</span>
+              <span class="gm-time-read">어제</span>
+            </div>
+            <div class="gm-item-row2 gm-read">오늘의 주요 소식</div>
+            <div class="gm-item-row3">주요 소식을 확인하세요...</div>
+          </div>
+        </div>
+
+        <div class="gm-item gm-item-read">
+          <div class="gm-item-avatar" style="background:#e8eaed;color:#80868b;font-size:11px;">S</div>
+          <div class="gm-item-body">
+            <div class="gm-item-row1">
+              <span class="gm-sender-read">쇼핑몰</span>
+              <span class="gm-time-read">월요일</span>
+            </div>
+            <div class="gm-item-row2 gm-read">오늘의 특가 상품 안내</div>
+            <div class="gm-item-row3">회원님을 위한 추천...</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 하단 네비게이션 -->
+      <div class="gm-nav">
+        <div class="gm-nav-item gm-nav-active">✉️<div>메일</div></div>
+        <div class="gm-nav-item">💬<div>채팅</div></div>
+        <div class="gm-nav-item">📅<div>캘린더</div></div>
+      </div>
+
+      <div class="pm-home-bar"><div></div></div>
     </div>
   </div>
 </section>
@@ -818,23 +1002,20 @@
   </p>
 
   <div class="reveal">
-    <a href="https://pf.kakao.com/_YOUR_CHANNEL_ID" class="kakao-btn-large" target="_blank">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-        <path d="M12 3C7.03 3 3 6.36 3 10.5c0 2.7 1.72 5.08 4.32 6.45L6.3 20.1c-.09.27.2.48.44.33L10.5 18c.49.06.99.09 1.5.09 4.97 0 9-3.36 9-7.5S16.97 3 12 3z" fill="#3C1E1E"/>
-      </svg>
-      카카오 채널 친구 추가
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd9ikelJSmO3MN3LguvJfgptcH1DZGO6v5qwHnMhvPISf99AA/viewform" class="kakao-btn-large" target="_blank">
+      ✉️ 무료 이메일 구독하기
     </a>
-    <p class="cta-note">무료 · 광고 없음 · 언제든 해제 가능</p>
+    <p class="cta-note">무료 · 광고 없음 · 언제든 구독 해지 가능</p>
   </div>
 </section>
 
 <!-- 푸터 -->
 <footer>
-  <p>부모 연습 중</p>
+  <p>육아한스푼</p>
   <p style="margin-top:8px;">
-    <a href="#">개인정보처리방침</a> · <a href="#">이용약관</a>
+    <a href="privacy.html">개인정보처리방침</a> · <a href="#">이용약관</a>
   </p>
-  <p style="margin-top:8px;">© 2025 부모 연습 중. All rights reserved.</p>
+  <p style="margin-top:8px;">© 2026 육아한스푼. All rights reserved.</p>
 </footer>
 
 <script>
